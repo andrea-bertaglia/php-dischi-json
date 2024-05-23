@@ -13,6 +13,7 @@ $list_array = json_decode($list_string, true); // da string a array
 // 3. compongo la risposta della chiamata API
 $response_data = [
     "results" => $list_array,
+    "success" => true
 ];
 // var_dump($response_data);
 

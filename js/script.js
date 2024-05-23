@@ -6,7 +6,6 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      message: "test ok",
       albums: [],
     };
   },

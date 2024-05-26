@@ -7,10 +7,19 @@ $disc_string = file_get_contents('dischi.json'); // da json a string
 
 // 2. trasformo la stringa in un array
 $disc_array = json_decode($disc_string, true); // da string a array
-// var_dump($disc);
+// var_dump($disc_array);
 
 // GESTISCO LA CHIAMATA API
 // 3. compongo la risposta della chiamata API
+
+if (isset($_POST["index"])) {
+    $disc_index = $_POST["index"];
+    $disc_array[$disc_index]['like'] = !$disc_array[$disc_index]['like'];
+
+    // Salvo l'array modificato nel file JSON
+    file_put_contents('dischi.json', json_encode($disc_array));
+}
+
 $response_data = [
     "results" => $disc_array,
     "success" => true

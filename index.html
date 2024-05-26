@@ -34,30 +34,46 @@
       </header>
       <main class="pb-5" style="background-color: #1c2d3c">
         <div class="container w-75">
-          <div class="row justify-content-center p-3">
-            <div class="col-4 g-5" v-for="(album, index) in albumsFiltered">
+          <div class="row pt-3 d-flex justify-content-center">
+            <div
+              class="col-6 d-flex justify-content-center align-items-center gap-3 pt-3"
+            >
+              <button @click="showAll" class="btn btn-secondary">
+                Mostra Tutti
+              </button>
+              <button @click="showOnlyLiked" class="btn btn-secondary">
+                Mostra Solo Preferiti
+              </button>
+            </div>
+          </div>
+          <div class="row justify-content-center pb-3">
+            <div
+              class="col-4 g-5"
+              v-for="(album, index) in albumsFiltered"
+              :key="index"
+            >
               <div
                 class="card text-center text-white py-4 h-100"
                 style="background-color: #102030"
-                @click="getLiked(index)"
+                @click="toggleLike(index)"
               >
                 <ul class="list-unstyled">
                   <li class="py-2">
                     <img
                       class="w-75 my-4 mx-auto"
-                      :src="`${album.poster}`"
-                      :alt="`Cover di ${album.poster}`"
+                      :src="album.poster"
+                      :alt="'Cover di ' + album.title"
                     />
                   </li>
-                  <li class="fw-bold fs-5 mt-auto py-2">{{album.title}}</li>
-                  <li class="py-2">{{album.author}}</li>
-                  <li class="fw-bold fs-6 mt-auto py-2">{{album.year}}</li>
+                  <li class="fw-bold fs-5 mt-auto py-2">{{ album.title }}</li>
+                  <li class="py-2">{{ album.author }}</li>
+                  <li class="fw-bold fs-6 mt-auto py-2">{{ album.year }}</li>
                   <li
                     class="fs-5 mt-auto pt-4 d-flex align-items-center justify-content-center"
-                    v-if="album.like === true"
+                    v-if="album.like"
                   >
-                    <span class="fs-4 text-danger me-2">&hearts;</span
-                    ><span class="fs-6"> 1</span>
+                    <span class="fs-4 text-danger me-2">&hearts;</span>
+                    <span class="fs-6"> 1</span>
                   </li>
                 </ul>
               </div>

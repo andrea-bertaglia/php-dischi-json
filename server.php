@@ -20,8 +20,16 @@ if (isset($_POST["index"])) {
     file_put_contents('dischi.json', json_encode($disc_array));
 }
 
+// Applica il filtro se presente
+$filtered_disc_array = $disc_array;
+if (isset($_POST['filter']) && $_POST['filter'] === 'liked') {
+    $filtered_disc_array = array_filter($disc_array, function ($disc) {
+        return $disc['like'];
+    });
+}
+
 $response_data = [
-    "results" => $disc_array,
+    "results" => array_values($filtered_disc_array), // Reset the array keys
     "success" => true
 ];
 // var_dump($response_data);
